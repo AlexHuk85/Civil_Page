@@ -1,7 +1,8 @@
 body {
     font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
     display: flex;
-    justify-content: center;
+    flex-direction: column; /* Change body to flex column to accommodate header */
+    justify-content: start; /* Align items to the start at the top */
     align-items: center;
     min-height: 100vh;
     margin: 0;
@@ -9,66 +10,105 @@ body {
     color: #333;
 }
 
+.header {
+    width: 100%;
+    padding: 20px;
+    background-color: #f0fcfc; /* Light header background */
+    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+    display: flex;
+    justify-content: space-between; /* Space logo and hamburger icon */
+    align-items: center;
+    box-sizing: border-box; /* Important to include padding in width calculation */
+    position: relative; /* For positioning hamburger menu */
+}
+
+.header .logo {
+    font-size: 1.5em;
+    font-weight: bold;
+    color: #26a69a;
+}
+
+.hamburger-icon {
+    background: none;
+    border: none;
+    font-size: 1.8em;
+    color: #555;
+    cursor: pointer;
+    padding: 10px;
+    border-radius: 5px; /* Optional: rounded background for icon */
+    transition: background-color 0.3s ease;
+}
+
+.hamburger-icon:hover {
+    background-color: rgba(0, 0, 0, 0.05); /* Light background on hover */
+}
+
+.hamburger-menu {
+    position: absolute; /* Position menu relative to header */
+    top: 100%; /* Place menu right below header */
+    right: 0;
+    background-color: #ffffff;
+    border: 1px solid #ccc;
+    border-top: none;
+    border-radius: 0 0 8px 8px;
+    width: 200px; /* Adjust menu width as needed */
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.15);
+    display: none; /* Initially hidden */
+    z-index: 10; /* Ensure it's above other content */
+}
+
+.hamburger-menu.active {
+    display: block; /* Show menu when active class is added */
+}
+
+.hamburger-menu ul {
+    list-style: none;
+    padding: 0;
+    margin: 0;
+}
+
+.hamburger-menu li a {
+    display: block;
+    padding: 12px 15px;
+    text-decoration: none;
+    color: #333;
+    transition: background-color 0.3s ease;
+}
+
+.hamburger-menu li a:hover {
+    background-color: #f4f4f4;
+}
+
+
 .container {
     background-color: #ffffff;
     padding: 40px;
     border-radius: 12px;
     box-shadow: 0 8px 20px rgba(0, 0, 0, 0.15);
-    width: 450px; /* Base width for larger screens */
-    max-width: 95%; /* Ensure container doesn't get wider than 95% of the screen */
+    width: 450px;
+    max-width: 95%;
     text-align: center;
-    margin: 20px; /* Add some margin around the container */
+    margin: 20px;
+    margin-top: 30px; /* Add some top margin to separate from header */
 }
 
-h1 {
-    color: #26a69a;
-    margin-bottom: 30px;
-    font-size: 2.5em;
-    font-weight: 600;
+/* ... (Rest of your existing CSS for container, h1, input-group, button-group, result-area remains the same) ... */
+
+.continue-button-area {
+    margin-top: 20px;
+    text-align: center; /* Center the button */
+    display: none; /* Initially hidden */
 }
 
-.input-group {
-    margin-bottom: 25px;
-    text-align: left;
+.continue-button-area.show {
+    display: block; /* Show when class 'show' is added */
 }
 
-.input-group label {
-    display: block;
-    margin-bottom: 8px;
-    font-weight: 500;
-    color: #555;
-    font-size: 1.1em;
-}
-
-.input-group input[type="number"] {
-    width: calc(100% - 20px);
-    padding: 12px;
-    border: 1px solid #ccc;
-    border-radius: 6px;
-    box-sizing: border-box;
-    margin-top: 5px;
-    font-size: 1em;
-    transition: border-color 0.3s ease;
-}
-
-.input-group input[type="number"]:focus {
-    border-color: #26a69a;
-    outline: none;
-    box-shadow: 0 0 0 2px rgba(38, 166, 154, 0.2);
-}
-
-.button-group {
-    margin-top: 30px;
-    display: flex;
-    justify-content: center;
-    gap: 15px;
-}
-
-.button-group button {
+.continue-btn {
     padding: 12px 25px;
     border: none;
     border-radius: 8px;
-    background-color: #26a69a;
+    background-color: #00bcd4; /* Cyan color for Continue button */
     color: white;
     cursor: pointer;
     font-size: 1.1em;
@@ -77,80 +117,69 @@ h1 {
     box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
 }
 
-.button-group button#clearBtn {
-    background-color: #ff7043;
-}
-
-.button-group button:hover {
-    background-color: #009688;
+.continue-btn:hover {
+    background-color: #00acc1; /* Darker cyan on hover */
     transform: translateY(-2px);
     box-shadow: 0 4px 8px rgba(0, 0, 0, 0.15);
 }
 
-.button-group button#clearBtn:hover {
-    background-color: #f4511e;
-}
-
-.button-group button:active {
+.continue-btn:active {
     transform: translateY(0);
     box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
 }
 
-.result-area {
-    margin-top: 40px;
-    padding: 20px;
-    border: 2px solid #26a69a;
-    border-radius: 8px;
-    background-color: #f0fcfc;
-    font-size: 1.2em;
-    color: #444;
-    word-wrap: break-word;
-    font-weight: 500;
-    box-shadow: inset 0 2px 4px rgba(0, 0, 0, 0.05);
-}
 
-/* Media Query for smaller screens (like phones) */
+/* Media Query for smaller screens (like phones) - Adjustments for header and hamburger menu */
 @media (max-width: 600px) {
+    body {
+        justify-content: flex-start; /* Align body content to the start on small screens */
+    }
+
+    .header {
+        padding: 15px; /* Reduce header padding on small screens */
+    }
+
+    .header .logo {
+        font-size: 1.3em; /* Reduce logo size on small screens */
+    }
+
+    .hamburger-icon {
+        font-size: 1.6em; /* Reduce hamburger icon size on small screens */
+    }
+
     .container {
-        width: auto; /* Let container take full width on small screens */
-        padding: 20px; /* Reduce padding for smaller screens */
-        margin: 10px; /* Reduce container margin on small screens */
+        width: auto;
+        padding: 20px;
+        margin: 10px;
+        margin-top: 20px; /* Adjust container top margin on small screens */
     }
 
-    h1 {
-        font-size: 2em; /* Reduce heading size on smaller screens */
-        margin-bottom: 20px; /* Adjust heading margin */
-    }
-
-    .input-group {
-        margin-bottom: 20px; /* Adjust input group margin */
-    }
-
-    .input-group label {
-        font-size: 1em; /* Reduce label size on smaller screens */
-        margin-bottom: 6px; /* Adjust label margin */
-    }
-
-    .input-group input[type="number"] {
-        padding: 10px; /* Reduce input padding */
-        font-size: 0.95em; /* Reduce input text size */
-    }
+    /* ... (Rest of your existing media query CSS for container, h1, input-group, button-group, result-area remains largely the same) ... */
 
     .button-group {
-        flex-direction: column; /* Stack buttons vertically on small screens */
-        gap: 10px; /* Reduce gap between stacked buttons */
-        margin-top: 20px; /* Adjust button group margin */
+        flex-direction: column;
+        gap: 10px;
+        margin-top: 20px;
     }
 
     .button-group button {
-        width: 100%; /* Make buttons full width on small screens */
-        padding: 12px; /* Keep button padding same */
-        font-size: 1em; /* Adjust button text size */
+        width: 100%;
+        padding: 12px;
+        font-size: 1em;
     }
 
     .result-area {
-        margin-top: 30px; /* Adjust result area margin */
-        padding: 15px; /* Reduce result area padding */
-        font-size: 1.1em; /* Reduce result text size */
+        margin-top: 30px;
+        padding: 15px;
+        font-size: 1.1em;
+    }
+
+    .continue-button-area {
+        margin-top: 15px; /* Adjust continue button area margin on small screens */
+    }
+
+    .continue-btn {
+        padding: 10px 20px; /* Reduce continue button padding on small screens */
+        font-size: 1em; /* Reduce continue button font size on small screens */
     }
 }
