@@ -4,9 +4,22 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Moisture Content Calculator</title>
-    <link rel="stylesheet" href="css_google.css">
+    <link rel="stylesheet" href="styles.css">
 </head>
 <body>
+    <header class="header">
+        <div class="logo">Moisture Calculator</div>
+        <button class="hamburger-icon" id="hamburgerBtn">
+            ☰ </button>
+        <nav class="hamburger-menu" id="hamburgerMenu">
+            <ul>
+                <li><a href="#">Home</a></li>
+                <li><a href="#">CBR</a></li>
+                <li><a href="#">Binder</a></li>
+            </ul>
+        </nav>
+    </header>
+
     <div class="container">
         <h1>Moisture Content Calculator</h1>
         <div class="input-group">
@@ -28,9 +41,13 @@
         </div>
 
         <div id="result" class="result-area">
-            </div>
+        </div>
+
+        <div class="continue-button-area" id="continueButtonArea">
+            <button id="continueBtn" class="continue-btn">Continue</button>
+        </div>
     </div>
 
-    <script src="script_google.js"></script>
+    <script src="script.js"></script>
 </body>
 </html>
